@@ -4,7 +4,6 @@
 
 JNIEXPORT void JNICALL Java_Triangle_form (JNIEnv *env, jobject obj, jint n1, jint n2) {
 	jint row,symbol, i, j, k;
-	jdouble result;
 
 	row = ((jint)n1);
 	symbol = ((jint)n2);
