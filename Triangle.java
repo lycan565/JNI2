@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.InputMismatchException;
 
 public class Triangle{
 	
@@ -7,32 +8,54 @@ public class Triangle{
           System.loadLibrary("Triangle");
     }
 
-	private native void form(int n1, int n2);
+	private native void form(int rows, int shape);
 	
 	
      public static void main(String[] args) {
 		 
+		 int row, symbol;
+		 
          Scanner scanner = new Scanner(System.in);
-         System.out.printf("Enter number of rows: ");
-         int row = scanner.nextInt();
+         System.out.print("\nEnter number of rows : ");
+
+		 do {
+
+			try {
+				row = scanner.nextInt();
+				if ( row>= 0) break;
+
+			} catch (InputMismatchException e) {
+			} finally {
+				scanner.nextLine();
+			}
+
+			System.out.print("\nInput must be an integer!\nEnter number of rows : ");
+		} while (true);
 		 
 		
 		 Scanner scanner2 = new Scanner(System.in);
-         System.out.printf("Enter shape (number): ");
-         int symbol = scanner2.nextInt();
-		  
+         System.out.print("Enter shape (number): ");
+		 
+		 do {
+
+			try {
+				symbol = scanner2.nextInt();
+				if ( symbol>=0 && symbol<10) break;
+
+			} catch (InputMismatchException e) {
+			} finally {
+				scanner2.nextLine();
+			}
+
+			System.out.print("\nInput must be an integer from 0 to 9!\nEnter shape (number) : ");
+		} while (true);
+		 
+		 scanner.close();
+		 scanner2.close();
 		  
 		 Triangle tr = new Triangle();
 		 tr.form(row, symbol);
 
-}
-
-//how to run (for me):
-//javac Triangle.java
-//java -h . Triangle.java
-//x86_64-w64-mingw32-gcc -I"%JAVA_HOME%\include" -I"%JAVA_HOME%\include\win32" -shared -o Triangle.dll Triangle.c
-
-
-
+	}
 
 }
